@@ -1,0 +1,170 @@
+ %\documentclass[colorinlistoftodos]{jfm}
+%\documentclass[colorinlistoftodos]{elsarticle}
+\documentclass[]{cas-sc}
+%\usepackage[sort&compress,numbers]{natbib}
+\usepackage[backend=bibtex,sorting=none,maxcitenames=1000,maxbibnames=99,style=numeric-comp]{biblatex}
+
+\usepackage{graphicx}
+\usepackage{amsmath,amsthm, amssymb, float, bm, subcaption}
+\usepackage{placeins}
+\usepackage{longtable,tabularx,booktabs}
+\usepackage{soul}
+\usepackage{tcolorbox}
+\definecolor{C0}{HTML}{1F77B4}
+\definecolor{C1}{HTML}{FF7F0E}
+\definecolor{C2}{HTML}{2ca02c}
+\definecolor{C3}{HTML}{d62728}
+\definecolor{C4}{HTML}{9467bd}
+\definecolor{C5}{HTML}{8c564b}
+
+% Comment this entire section out when completely done
+\def\usetodonotes{} %% Comment this line to hide all todonotes 
+\ifdefined\usetodonotes
+\setlength{\paperwidth}{10.0in}
+\setlength{\marginparwidth}{2.25in}
+\usepackage{todonotes}
+\newcommand{\tododone}[1]{\todo[disable]{#1}\addcontentsline{tdo}{todo}{\st{#1}}}
+\newcommand{\brandon}[1]{\todo[color=C0!10,linecolor=C0,bordercolor=C0]{BR: #1}}
+\newcommand{\student}[1]{\todo[color=C1!10,linecolor=C1,bordercolor=C1]{MM: #1}}
+\else
+\newcommand{\tododone}[1]{}
+\fi
+
+
+% Comment this entire section out when completely done
+%\def\usechanges{} %% Comment this line to switch to FINAL mode
+%\ifdefined\usechanges
+%\setlength{\paperwidth}{9.0in}
+%\setlength{\marginparwidth}{1.25in}
+%\let\comment\undefined % needed for changes package
+%\usepackage[commentmarkup=todo,authormarkup=none]{changes} 
+%\definechangesauthor[color=C0]{R1} % changes relevant to R1
+%\definechangesauthor[color=C1]{R2} % changes relevant to R2
+%\makeatletter
+% This bit of code removes the additional labels in the changes comment
+%\renewcommand{\Changes@Markup@comment}[3]{%
+%  \IfStrEq{\Changes@optioncommentmarkup}{todo}%
+%		{\colorlet{Changes@todocolor}{authorcolor}\todo[color=Changes@todocolor!10, bordercolor=Changes@todocolor, linecolor=Changes@todocolor!70, nolist]{\textbf #1}}{}}
+%\makeatother
+%\else
+%\usepackage{xparse}
+%\NewDocumentCommand{\added}{ o o m }{#3}
+%\NewDocumentCommand{\deleted}{ o o m }{}
+%\NewDocumentCommand{\replaced}{ o o m m }{#3}
+%\fi
+
+% cleveref must be loaded after hyperref
+\usepackage[capitalize]{cleveref}
+\newcommand{\creflastconjunction}{,~and~} % page 12 of the manual
+
+% Set crop options for 3D simulation images
+% https://tex.stackexchange.com/questions/177357/how-to-abbreviate-the-trim-option-of-an-image-in-a-newcommand
+\makeatletter
+\define@key{Gin}{Crop3D}[]{\setkeys{Gin}{trim=21mm 15mm 80mm 22mm,clip}}
+\makeatother
+
+\renewcommand{\floatpagefraction}{1.0}%
+\renewcommand{\topfraction}{1.0}%
+\renewcommand{\bottomfraction}{1.0}%
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+%
+% BibLaTeX parameters to comply with C&F formatting requirements
+%
+\addbibresource{main.bib}
+\makeatletter                                                                   
+\newlength{\bibsep}{\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep} % Compatibility with cas-sc
+\makeatother 
+\setlength\bibitemsep{0pt}
+\DeclareFieldFormat[article]{title}{#1} % Remove quotes from bib titles
+\renewbibmacro{in:}{} % Remove "in" from biblioraphy
+\DeclareFieldFormat[article]{journaltitle}{#1} % Remove quotes from bib titles
+\renewcommand*{\newunitpunct}{\addcomma\space} % Use commas instead of spaces
+\DeclareFieldFormat[article]{pages}{#1} % Remove "p." or "pp." from page numbers
+
+%\bibliographystyle{elsarticle-num}
+
+\begin{document}
+
+
+\ifdefined\usetodonotes
+\setcounter{page}{0}
+\listoftodos
+\fi
+
+
+\shorttitle{Paper short title}    
+\shortauthors{Author1, Author2}  
+\title [mode = title]{Paper title}  
+\author[uccs]{Author One}[orcid=0000-0000-0000-0000]%[]options]
+\author[isu,uccs]{Brandon Runnels}[orcid=0000-0003-3043-5227]%[]options]
+\cormark[1]
+\cortext[1]{Corresponding author}
+\ead{brunnels@iastate.edu}
+\affiliation[uccs]{organization={Department of },
+            city={city},
+            state={CO},
+            country={USA}}
+\affiliation[isu]{organization={Department of Aerospace Engineering, Iowa State University},
+            city={Ames},
+            state={IA},
+            country={USA}}
+
+
+\begin{abstract}
+    Add an abstract
+\end{abstract}
+
+\begin{keywords}
+ Solid rocket motors \sep Combustion \sep Diffuse interface methods \sep Computational physics
+\end{keywords}
+
+
+\ifdefined\usetodonotes
+\begin{tcolorbox}[title={\bf Todonote convention}]
+  Please use the following convention when making notes:
+  \begin{center}\verb-\yourname{Addresseename, we need to XYZ}-\end{center}
+  In other words use your name macro to make any comments, then address specific people in the text.
+  For instance, if Brandon wants Bob to run more results, he should express this in the following way.
+  \begin{center}
+    \verb-\brandon{Bob, we need to run more results}-
+  \end{center}
+\end{tcolorbox}
+\listoftodos
+ 
+\setcounter{page}{0}
+\fi
+
+
+\maketitle
+
+\vspace{10pt}\noindent A\,U\,T\,H\,O\,R\, \,C\,O\,N\,T\,R\,I\,B\,U\,T\,I\,O\,N\,S \\
+{\bf MM:} Performing research, writing.
+{\bf BR:} Supervision and writing.
+
+\section{NOTES}
+
+add notes
+
+\section{Introduction}
+\section{Methods}
+\section{Results}
+\section{Conclusion}\label{section:conclusion}
+
+conclusion
+
+\section{Acknowledgements}
+
+The authors acknowledge support from  ...
+
+\FloatBarrier
+\printbibliography
+%\bibliography{main}
+
+
+\end{document}
